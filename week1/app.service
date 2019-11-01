@@ -1,0 +1,9 @@
+[Unit]
+Description=Hello world app
+[Service]
+ExecStart=/usr/bin/java -jar /src/hello-spring-boot-0.1.0.jar --spring.config.name=test.application.properties
+User=appuser
+Restart=always
+SuccessExitStatus=143
+[Install]
+WantedBy=multi-user.target
