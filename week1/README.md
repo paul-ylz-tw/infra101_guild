@@ -27,6 +27,8 @@ journalctl -u app
 
 - Overriding the default configuration file name passed to Spring is done with `--spring.config.name`.
 
+- On OSX, to get a checksum of a file, use `shasum -a 256 <filename>`
+
 
 ## Rough Steps
 How do we spin up a basic VM using vagrant? How do we copy the jar file in?

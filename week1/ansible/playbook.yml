@@ -1,0 +1,57 @@
+---
+- hosts: all
+  tasks:
+    - name: Add openjdk repository
+      become: yes
+      apt_repository:
+        repo: ppa:openjdk-r/ppa
+        state: present
+    - name: Install Java
+      become: yes
+      apt:
+        name: openjdk-8-jdk
+        state: latest
+        update_cache: yes
+    - name: Create appuser group
+      become: yes
+      group:
+        name: appuser
+        state: present
+    - name: Create appuser user
+      become: yes
+      user:
+        name: appuser
+        group: appuser
+        state: present
+    - name: Download application jar
+      become: yes
+      get_url:
+        url: https://github.com/Thoughtworks-SEA-Capability/Infrastructure-101-Practice/raw/master/week1/hello-spring-boot-0.1.0.jar
+        dest: /home/appuser/
+        checksum: sha256:02c1d67038fd354f1666f77d73286243c70c0c434eaad8531b4357d304f6f65d
+        owner: appuser
+        group: appuser
+    - name: Create directory for app.service unit
+      become: yes
+      file:
+        path: /usr/lib/systemd/system
+        state: directory
+    - name: Create systemd unit for app
+      become: yes
+      template:
+        src: templates/app.service.j2
+        dest: /usr/lib/systemd/system/app.service
+        mode: 0640
+      notify:
+        - reload systemd
+    - name: Start app
+      become: yes
+      systemd:
+        name: app
+        state: started
+  handlers:
+    - name: reload systemd
+      become: yes
+      systemd:
+        daemon_reload: yes
+
