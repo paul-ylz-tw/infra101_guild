@@ -2,6 +2,7 @@
 provider "aws" {
   profile="awsbeach"
   region = "${var.aws_region}"
+  version = "~> 2.35"
 }
 
 # Create a VPC to launch our instances into
@@ -54,8 +55,8 @@ resource "aws_security_group" "elb" {
 # Our default security group to access
 # the instances over SSH and HTTP
 resource "aws_security_group" "default" {
-  name        = "helloapp-asg"
-  description = "Used in the terraform"
+  name        = "paul-asg"
+  description = "paul_guild_week2_asg"
   vpc_id      = "${aws_vpc.default.id}"
 
   # SSH access from TW office and home

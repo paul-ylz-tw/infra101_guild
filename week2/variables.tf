@@ -1,6 +1,6 @@
 variable "public_key_path" {
   description = "path to my public key"
-  default = "~/.ssh/guild"
+  default = "~/.ssh/guild.pub"
 }
 
 variable "key_name" {
