@@ -43,6 +43,7 @@ Using the shell provisioner and a script at `bootstrap.sh`
 
 What user is running the jar? How do we make it more secure?
 It was the root user, and we have created appuser to do it to make it more secure.
+Create system users with --gecos "" (don't ask for finger info), --disabled-password (don't let user have a password), and --disabled-login (don't let user login to a shell).
 
 How can we run our app as a service? What are the benefits?
 By using systemd. See app.service.
@@ -55,3 +56,5 @@ How can we automatically apply that configuration in a reproducible way using An
 How can we automatically deliver configuration changes and ensure the app picks them up?
 
 (extra) How can we package the resulting VM image for reuse using Packer?
+
+143 is the exit status that the JVM will send to SystemD upon SIGTERM.
