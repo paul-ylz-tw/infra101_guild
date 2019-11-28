@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meow
+  labels:
+    app: meow
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: meow
+  template:
+    metadata:
+      labels:
+        app: meow
+    spec:
+      containers:
+        - name: meow-app
+          image: janesee3/meow-application:1
+          ports:
+          - containerPort: 8080
+          env:
+          - name: DO_YOU_LIKE_CATS
+            valueFrom:
+              configMapKeyRef:
+                name: meow-config
+                key: DO_YOU_LIKE_CATS
+          - name: CATS_URL
+            valueFrom:
+              configMapKeyRef:
+                name: meow-config
+                key: CATS_URL
+

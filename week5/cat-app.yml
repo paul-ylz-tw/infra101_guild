@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cat-app
+  labels:
+    app: cat
+spec:
+  containers:
+    - name: cat-app
+      image: janesee3/cat-application:1
