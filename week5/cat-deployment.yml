@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cat
+  name: cat-dep
   labels:
-    app: cat
+    app: cat-dep
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: cat
+      app: cat-app
   template:
     metadata:
       labels:
-        app: cat
+        app: cat-app
     spec:
       containers:
         - name: cat-app
